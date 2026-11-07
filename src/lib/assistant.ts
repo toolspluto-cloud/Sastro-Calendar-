@@ -15,7 +15,14 @@ export type ChatTurn = { role: "user" | "assistant"; content: string };
 
 export type AssistantAnswer = ChatAnswer & { mode: "ai" | "rules" };
 
-const DEFAULT_MODEL = "claude-opus-5-5";
+export type AiProvider = "gemini" | "anthropic";
+
+const DEFAULT_MODELS: Record<AiProvider, string> = {
+  gemini: "gemini-3.5-flash-lite",
+  anthropic: "claude-opus-5-5",
+};
+const GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/interactions";
+const GEMINI_API_REVISION = "2026-05-20";
 // Haiku and older models reject the server-side fallback parameter.
 const FALLBACK_MODELS = /^claude-(opus-5|sonnet-5-5|fable-5-1)/;
 const MAX_TOKENS = 2000; // thinking shares this budget; replies themselves are short
@@ -56,6 +63,15 @@ function getClient() {
 
 export function isAiEnabled() {
   return Boolean(process.env.SATRO_LLM_API_KEY);
+}
+
+/** Which AI answers chat. Gemini unless SATRO_LLM_PROVIDER=anthropic. */
+export function aiProvider(): AiProvider {
+  return process.env.SATRO_LLM_PROVIDER?.trim().toLowerCase() === "anthropic" ? "anthropic" : "gemini";
+}
+
+function aiModel() {
+  return process.env.SATRO_LLM_MODEL?.trim() || DEFAULT_MODELS[aiProvider()];
 }
 
 /** Keep only well-formed recent turns; the list must start with a user turn. */
@@ -116,7 +132,7 @@ async function askClaude(
   history: ChatTurn[],
   context: Context
 ): Promise<string | null> {
-  const model = process.env.SATRO_LLM_MODEL || DEFAULT_MODEL;
+  const model = aiModel();
   try {
     const response = await getClient().beta.messages.create({
       model,
@@ -154,6 +170,70 @@ async function askClaude(
   }
 }
 
+type GeminiStep = { type?: string; content?: { type?: string; text?: string }[] };
+
+/** Gemini through Google's Interactions API. Nothing is stored on Google's side (store: false). */
+async function askGemini(
+  question: string,
+  history: ChatTurn[],
+  context: Context
+): Promise<string | null> {
+  const step = (type: "user_input" | "model_output", text: string) => ({
+    type,
+    content: [{ type: "text", text }],
+  });
+  try {
+    const res = await fetch(GEMINI_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-goog-api-key": process.env.SATRO_LLM_API_KEY ?? "",
+        "Api-Revision": GEMINI_API_REVISION,
+      },
+      body: JSON.stringify({
+        model: aiModel(),
+        system_instruction: SYSTEM_PROMPT,
+        input: [
+          ...history.map((t) => step(t.role === "user" ? "user_input" : "model_output", t.content)),
+          step(
+            "user_input",
+            `CONTEXT:\n${JSON.stringify(context)}\n\nTheir message:\n${question}`
+          ),
+        ],
+        generation_config: { max_output_tokens: MAX_TOKENS, thinking_level: "low" },
+        store: false,
+      }),
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    });
+    if (!res.ok) {
+      // Log the kind of failure only: never the key or what the user wrote.
+      const kind =
+        res.status === 400 || res.status === 401 || res.status === 403
+          ? "SATRO_LLM_API_KEY or request was rejected"
+          : res.status === 404
+            ? "unknown SATRO_LLM_MODEL"
+            : res.status === 429
+              ? "rate limited"
+              : "API error";
+      console.warn(`[satro] AI chat (Gemini): ${kind}`, res.status);
+      return null;
+    }
+    const data = (await res.json()) as { status?: string; steps?: GeminiStep[] };
+    // Anything but a finished reply (cut off, blocked, failed) falls back to templates.
+    if (data.status !== "completed") return null;
+    const text = (data.steps ?? [])
+      .filter((s) => s.type === "model_output")
+      .flatMap((s) => s.content ?? [])
+      .flatMap((c) => (c.type === "text" && c.text ? [c.text] : []))
+      .join("")
+      .trim();
+    return text || null;
+  } catch {
+    console.warn("[satro] AI chat (Gemini): request failed");
+    return null;
+  }
+}
+
 /**
  * Answer a chat message. Rule-based replies stay the safety net: crisis messages
  * never go to the model, and any AI failure or off-brand reply falls back to them.
@@ -168,7 +248,8 @@ export async function askSatro(
   if (!question || !isAiEnabled() || isCrisisMessage(question)) return rules();
 
   const context = buildContext(question, about);
-  const reply = await askClaude(question, cleanHistory(rawHistory), context);
+  const ask = aiProvider() === "gemini" ? askGemini : askClaude;
+  const reply = await ask(question, cleanHistory(rawHistory), context);
   if (!reply || !isOnBrand(reply, question, context)) return rules();
   return { answer: reply, sources: [], matches: [], disclaimer: AI_DISCLAIMER, mode: "ai" };
 }

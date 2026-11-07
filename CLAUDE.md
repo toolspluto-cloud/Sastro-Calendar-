@@ -61,7 +61,7 @@ Live ephemeris or a full Vimshottari chart, gemstone prescriptions, face or hand
 | Font | Geist (local woff, `next/font/local`) |
 | Persistence (MVP) | JSON files under `data/` (single user, local only). Milestone 9 moves this to SQLite/Prisma or Vercel Postgres for multi-user |
 | Tests | Vitest for `lib/*` unit tests; Playwright for smoke tests (optional) |
-| Optional LLM | Claude via `@anthropic-ai/sdk` behind `SATRO_LLM_*` env vars, off by default |
+| Optional LLM | Gemini (default, Interactions REST API via `fetch`) or Claude via `@anthropic-ai/sdk`, behind `SATRO_LLM_*` env vars, off by default |
 
 ### Exact setup commands (from scratch)
 ```bash
@@ -93,8 +93,9 @@ Add these scripts to `package.json`: `"test": "vitest run"` and `"typecheck": "t
 | `GOOGLE_CLIENT_ID` | For live Calendar | Google OAuth Web client ID |
 | `GOOGLE_CLIENT_SECRET` | For live Calendar | Google OAuth Web client secret |
 | `SATRO_MOCK_CALENDAR` | Optional | `true` forces mock mode even when OAuth is set |
-| `SATRO_LLM_API_KEY` | Optional | Enables LLM phrasing in chat (§12). Leave empty for rule-only mode |
-| `SATRO_LLM_MODEL` | Optional | Claude model ID. Defaults to `claude-opus-5-5` |
+| `SATRO_LLM_PROVIDER` | Optional | `gemini` (default) or `anthropic` |
+| `SATRO_LLM_API_KEY` | Optional | API key for the chosen provider (Gemini key from aistudio.google.com). Enables LLM phrasing in chat (§12). Leave empty for rule-only mode |
+| `SATRO_LLM_MODEL` | Optional | Model ID. Defaults to `gemini-3.5-flash-lite` (Gemini) or `claude-opus-5-5` (Claude) |
 | `DATABASE_URL` | Milestone 9 | When moving off JSON files |
 
 `env.template` (ship this file. It contains no values):
@@ -104,6 +105,7 @@ NEXTAUTH_SECRET=
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 SATRO_MOCK_CALENDAR=false
+SATRO_LLM_PROVIDER=gemini
 SATRO_LLM_API_KEY=
 SATRO_LLM_MODEL=
 ```
