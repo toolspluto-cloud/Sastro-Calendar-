@@ -1,0 +1,50 @@
+{
+  "schema": "palmistry.v1",
+  "description": "Major lines, mounts, finger cues, hand shapes, basic compatibility — high-level traits only. No medical claims.",
+  "commercial_flags": [
+    "Palmistry is symbolic/entertainment — never claim medical, lifespan, or clinical diagnosis from lines.",
+    "Life line does NOT predict length of life; phrase as vitality/energy patterns only."
+  ],
+  "sources": [
+    "https://science.howstuffworks.com/science-vs-myth/extrasensory-perceptions/palm-reading-lines.htm",
+    "https://www.womenshealthmag.com/life/a61852755/guide-to-palmistry/",
+    "https://paramarsh.app/patrika/palmistry/palmistry-complete-guide",
+    "https://occultum.co.uk/tools/palmistry",
+    "https://answerspin.com/palmistry/"
+  ],
+  "major_lines": [
+    {"name":"Heart line","location":"Upper horizontal crease under fingers","reads_for":"Emotional style, relationship patterns, how affection is expressed"},
+    {"name":"Head line","location":"Middle horizontal crease across palm","reads_for":"Thinking style, communication, focus vs imagination"},
+    {"name":"Life line","location":"Arc around base of thumb / Venus mount","reads_for":"Vitality, energy, major life changes — NOT lifespan"},
+    {"name":"Fate line","location":"Vertical crease toward middle finger (often faint/absent)","reads_for":"Career direction, sense of destiny/structure; absence is common and meaningful as flexibility"}
+  ],
+  "mounts": [
+    {"name":"Venus","location":"Base of thumb","association":"Vitality, affection, sensuality, magnetism"},
+    {"name":"Jupiter","location":"Under index finger","association":"Ambition, leadership, confidence, ideals"},
+    {"name":"Saturn","location":"Under middle finger","association":"Responsibility, discipline, seriousness, fate themes"},
+    {"name":"Apollo / Sun","location":"Under ring finger","association":"Creativity, success, joy, recognition"},
+    {"name":"Mercury","location":"Under little finger","association":"Communication, commerce, wit, health talkativeness"},
+    {"name":"Luna / Moon","location":"Outer palm edge opposite thumb","association":"Imagination, intuition, travel, subconscious"},
+    {"name":"Mars (upper/lower)","location":"Between Head/Heart area and below Life line","association":"Drive, courage, aggression, resilience"}
+  ],
+  "finger_cues_beginner": [
+    "Relative length: longer index (Jupiter) → leadership lean; longer ring (Apollo) → creative/recognition lean; longer little (Mercury) → communicative lean.",
+    "Shape keywords: spatulate (energy/action), square (practical), conic (artistic), pointed (idealistic) — beginner shorthand only.",
+    "Flexibility of thumb and fingers often read as adaptability vs fixed will — keep claims soft."
+  ],
+  "hand_shapes": [
+    {"element":"Earth","palm":"Square / broad","fingers":"Short relative to palm","temperament":"Practical, steady, sensory, grounded"},
+    {"element":"Air","palm":"Square / rectangular","fingers":"Long relative to palm","temperament":"Intellectual, communicative, curious, restless"},
+    {"element":"Fire","palm":"Long / oblong","fingers":"Short relative to palm","temperament":"Energetic, enthusiastic, impulsive, action-oriented"},
+    {"element":"Water","palm":"Long / oblong","fingers":"Long relative to palm","temperament":"Sensitive, intuitive, emotional, imaginative"}
+  ],
+  "compatibility_high_level": {
+    "methods": [
+      "Compare hand shapes: same element → easy rapport; adjacent elements (Fire-Air, Earth-Water) softer; opposite (Fire-Water, Earth-Air) need pacing and explicit empathy.",
+      "Compare Heart lines: similar curve/length → shared emotional tempo; very different → negotiate expression styles.",
+      "Optional cross with chart: Moon sign / Venus themes vs Heart line emotional style; Mercury vs Head line thinking style.",
+      "Dominant vs non-dominant hand: tradition often reads non-dominant as disposition/potential, dominant as developed pattern — compare both when available."
+    ],
+    "no_medical_claims": true
+  }
+}

@@ -1,0 +1,328 @@
+{
+  "schema": "timeline-keywords.v2",
+  "description": "Reusable keyword chips for Satro Calendar day timeline. Domains map to life areas; tone drives chip styling and event overlay tips.",
+  "disclaimer": "Traditional/symbolic entertainment guidance. Not predictive certainty or medical/financial advice.",
+  "domains": [
+    "career",
+    "money",
+    "health",
+    "social",
+    "romance",
+    "focus",
+    "travel",
+    "family",
+    "creativity",
+    "rest"
+  ],
+  "tones": [
+    "mood",
+    "energy",
+    "opportunity",
+    "caution"
+  ],
+  "keywords": [
+    {
+      "id": "career-lift",
+      "label": "Career glow-up",
+      "domain": "career",
+      "tone": "opportunity",
+      "tags": [
+        "work",
+        "pitch",
+        "visibility"
+      ]
+    },
+    {
+      "id": "steady-grind",
+      "label": "Locked in",
+      "domain": "career",
+      "tone": "energy",
+      "tags": [
+        "deep-work",
+        "admin"
+      ]
+    },
+    {
+      "id": "hold-the-pitch",
+      "label": "Save the big ask",
+      "domain": "career",
+      "tone": "caution",
+      "tags": [
+        "rahu-kaal",
+        "new-starts"
+      ]
+    },
+    {
+      "id": "clear-headed",
+      "label": "Clear head",
+      "domain": "focus",
+      "tone": "mood",
+      "tags": [
+        "decisions",
+        "planning"
+      ]
+    },
+    {
+      "id": "scattered-mind",
+      "label": "One thing at once",
+      "domain": "focus",
+      "tone": "caution",
+      "tags": [
+        "multitask",
+        "distract"
+      ]
+    },
+    {
+      "id": "deep-focus",
+      "label": "Deep focus",
+      "domain": "focus",
+      "tone": "energy",
+      "tags": [
+        "flow",
+        "solo-work"
+      ]
+    },
+    {
+      "id": "money-window",
+      "label": "Money moves",
+      "domain": "money",
+      "tone": "opportunity",
+      "tags": [
+        "negotiate",
+        "invoice",
+        "deal"
+      ]
+    },
+    {
+      "id": "spend-careful",
+      "label": "Sleep on big buys",
+      "domain": "money",
+      "tone": "caution",
+      "tags": [
+        "impulse",
+        "contracts"
+      ]
+    },
+    {
+      "id": "steady-cash",
+      "label": "Smart with cash",
+      "domain": "money",
+      "tone": "mood",
+      "tags": [
+        "budget",
+        "track"
+      ]
+    },
+    {
+      "id": "body-ready",
+      "label": "Body's ready",
+      "domain": "health",
+      "tone": "energy",
+      "tags": [
+        "gym",
+        "workout",
+        "vitality"
+      ]
+    },
+    {
+      "id": "pace-yourself",
+      "label": "Easy pace",
+      "domain": "health",
+      "tone": "caution",
+      "tags": [
+        "fatigue",
+        "recovery"
+      ]
+    },
+    {
+      "id": "vital-up",
+      "label": "Feeling fresh",
+      "domain": "health",
+      "tone": "mood",
+      "tags": [
+        "wellness",
+        "movement"
+      ]
+    },
+    {
+      "id": "social-open",
+      "label": "Social butterfly",
+      "domain": "social",
+      "tone": "opportunity",
+      "tags": [
+        "network",
+        "meetup"
+      ]
+    },
+    {
+      "id": "keep-light",
+      "label": "Keep it light",
+      "domain": "social",
+      "tone": "caution",
+      "tags": [
+        "conflict",
+        "gossip"
+      ]
+    },
+    {
+      "id": "warm-vibe",
+      "label": "Warm vibes",
+      "domain": "social",
+      "tone": "mood",
+      "tags": [
+        "friends",
+        "team"
+      ]
+    },
+    {
+      "id": "heart-open",
+      "label": "Heart open",
+      "domain": "romance",
+      "tone": "opportunity",
+      "tags": [
+        "date",
+        "connection"
+      ]
+    },
+    {
+      "id": "soft-edges",
+      "label": "Go soft",
+      "domain": "romance",
+      "tone": "caution",
+      "tags": [
+        "misread",
+        "pressure"
+      ]
+    },
+    {
+      "id": "tender-mood",
+      "label": "Soft and sweet",
+      "domain": "romance",
+      "tone": "mood",
+      "tags": [
+        "affection",
+        "listen"
+      ]
+    },
+    {
+      "id": "road-favor",
+      "label": "Good to roam",
+      "domain": "travel",
+      "tone": "opportunity",
+      "tags": [
+        "commute",
+        "trip"
+      ]
+    },
+    {
+      "id": "delay-prone",
+      "label": "Leave early",
+      "domain": "travel",
+      "tone": "caution",
+      "tags": [
+        "traffic",
+        "buffer"
+      ]
+    },
+    {
+      "id": "home-anchor",
+      "label": "Home comfort",
+      "domain": "family",
+      "tone": "mood",
+      "tags": [
+        "home",
+        "care"
+      ]
+    },
+    {
+      "id": "family-sync",
+      "label": "Family time",
+      "domain": "family",
+      "tone": "opportunity",
+      "tags": [
+        "talk",
+        "support"
+      ]
+    },
+    {
+      "id": "guard-boundaries",
+      "label": "Protect your peace",
+      "domain": "family",
+      "tone": "caution",
+      "tags": [
+        "tension",
+        "space"
+      ]
+    },
+    {
+      "id": "idea-spark",
+      "label": "Idea spark",
+      "domain": "creativity",
+      "tone": "opportunity",
+      "tags": [
+        "brainstorm",
+        "make"
+      ]
+    },
+    {
+      "id": "creative-flow",
+      "label": "Creative flow",
+      "domain": "creativity",
+      "tone": "energy",
+      "tags": [
+        "design",
+        "write"
+      ]
+    },
+    {
+      "id": "edit-not-ship",
+      "label": "Polish first",
+      "domain": "creativity",
+      "tone": "caution",
+      "tags": [
+        "draft",
+        "refine"
+      ]
+    },
+    {
+      "id": "restore-now",
+      "label": "Me time",
+      "domain": "rest",
+      "tone": "opportunity",
+      "tags": [
+        "nap",
+        "wind-down"
+      ]
+    },
+    {
+      "id": "low-battery",
+      "label": "Recharge mode",
+      "domain": "rest",
+      "tone": "energy",
+      "tags": [
+        "sleep",
+        "recover"
+      ]
+    },
+    {
+      "id": "protect-quiet",
+      "label": "Quiet time",
+      "domain": "rest",
+      "tone": "caution",
+      "tags": [
+        "overbook",
+        "noise"
+      ]
+    },
+    {
+      "id": "speak-up",
+      "label": "Speak up",
+      "domain": "career",
+      "tone": "mood",
+      "tags": [
+        "meetings",
+        "advocacy"
+      ]
+    }
+  ]
+}

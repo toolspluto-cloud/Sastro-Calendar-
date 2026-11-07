@@ -1,0 +1,80 @@
+{
+  "schema": "numerology.v1",
+  "description": "Chaldean and Pythagorean letter charts, core number formulas, personal year/month/day, lucky/unlucky popular associations.",
+  "disclaimer": "Lucky/unlucky numbers are popular-practice associations, not scientific. Label as traditional/symbolic entertainment.",
+  "sources": [
+    "https://swarnsiddhi.com/numerology-alphabet-chart",
+    "https://numerologywise.com/pythagorean-numerology/",
+    "https://nakshamastro.com/learn/chaldean-vs-pythagorean-numerology",
+    "https://www.worldnumerology.com/numerology-chart-calculator/"
+  ],
+  "pythagorean_chart": {
+    "1": ["A","J","S"], "2": ["B","K","T"], "3": ["C","L","U"], "4": ["D","M","V"],
+    "5": ["E","N","W"], "6": ["F","O","X"], "7": ["G","P","Y"], "8": ["H","Q","Z"], "9": ["I","R"]
+  },
+  "chaldean_chart": {
+    "1": ["A","I","J","Q","Y"], "2": ["B","K","R"], "3": ["C","G","L","S"], "4": ["D","M","T"],
+    "5": ["E","H","N","X"], "6": ["U","V","W"], "7": ["O","Z"], "8": ["F","P"],
+    "9": [],
+    "note": "No letter is assigned 9 in classical Chaldean; 9 is considered sacred."
+  },
+  "letter_values_az": {
+    "pythagorean": {"A":1,"B":2,"C":3,"D":4,"E":5,"F":6,"G":7,"H":8,"I":9,"J":1,"K":2,"L":3,"M":4,"N":5,"O":6,"P":7,"Q":8,"R":9,"S":1,"T":2,"U":3,"V":4,"W":5,"X":6,"Y":7,"Z":8},
+    "chaldean": {"A":1,"B":2,"C":3,"D":4,"E":5,"F":8,"G":3,"H":5,"I":1,"J":1,"K":2,"L":3,"M":4,"N":5,"O":7,"P":8,"Q":1,"R":2,"S":3,"T":4,"U":6,"V":6,"W":6,"X":5,"Y":1,"Z":7}
+  },
+  "reduction_rules": {
+    "pythagorean": "Reduce digit sums to a single digit 1–9, but keep master numbers 11, 22, 33 unreduced where tradition says so. Commonly reduce each name part separately then sum.",
+    "chaldean": "Often sum the whole name (or name-in-use) into a compound number first; many Chaldean practitioners do not treat 11/22/33 the same way as Pythagorean. Compound name number may be left as two digits for interpretation then reduced.",
+    "vowels_for_soul_urge": ["A","E","I","O","U"],
+    "y_treatment": "Default for training data: treat Y as consonant (Personality). Note that some practitioners count Y as vowel when it sounds like one."
+  },
+  "formulas": {
+    "life_path": {
+      "system": "Pythagorean / Western (date-based; same digits as Bhagyank except masters)",
+      "steps": [
+        "Reduce month to single digit (keep 11).",
+        "Reduce day to single digit (keep 11, 22).",
+        "Reduce year by summing digits until single digit (keep 11, 22, 33 if appearing as intermediate total per school).",
+        "Add the three reduced parts; reduce again keeping masters 11, 22, 33."
+      ],
+      "example": "Born 14 March 1991 → month 3, day 14→5, year 1+9+9+1=20→2; 3+5+2=10→1 → Life Path 1"
+    },
+    "destiny_expression": {
+      "steps": ["Map every letter of full birth name via chosen chart", "Sum (Pythagorean: often per name then combine)", "Reduce per system rules"],
+      "example_pythagorean": "MAYA RAO → MAYA 4+1+7+1=13→4; RAO 9+1+6=16→7; 4+7=11 → Expression 11"
+    },
+    "soul_urge": {
+      "steps": ["Sum vowels only (A E I O U; Y per policy)", "Reduce per system rules"]
+    },
+    "personality": {
+      "steps": ["Sum consonants only", "Reduce per system rules"]
+    },
+    "personal_year": {
+      "formula": "Reduce(month) + Reduce(day) + Reduce(calendar_year) → reduce to 1–9 (masters optional)",
+      "note": "Personal year runs roughly birthday-to-birthday or calendar year depending on school; document which the app uses."
+    },
+    "personal_month": {
+      "formula": "PersonalYear + calendar_month → reduce to 1–9"
+    },
+    "personal_day": {
+      "formula": "PersonalMonth + calendar_day → reduce to 1–9"
+    }
+  },
+  "lucky_unlucky_popular_practice": {
+    "disclaimer": "Popular-practice associations for entertainment apps — not scientific, not predictive certainty.",
+    "by_life_path": [
+      {"life_path":1,"lucky":[1,5,7],"unlucky":[4,8],"theme":"Leadership, beginnings"},
+      {"life_path":2,"lucky":[2,4,6],"unlucky":[5,9],"theme":"Partnership, diplomacy"},
+      {"life_path":3,"lucky":[3,5,9],"unlucky":[4,8],"theme":"Creativity, expression"},
+      {"life_path":4,"lucky":[1,4,7,8],"unlucky":[5,9],"theme":"Stability, work (often stressful personal years)"},
+      {"life_path":5,"lucky":[1,5,7],"unlucky":[4,6],"theme":"Freedom, change"},
+      {"life_path":6,"lucky":[2,3,6,9],"unlucky":[1,5],"theme":"Care, responsibility"},
+      {"life_path":7,"lucky":[1,5,7],"unlucky":[2,8],"theme":"Analysis, spirituality"},
+      {"life_path":8,"lucky":[2,4,6,8],"unlucky":[3,5],"theme":"Power, material results"},
+      {"life_path":9,"lucky":[3,6,9],"unlucky":[4,7],"theme":"Humanitarianism, completion"},
+      {"life_path":11,"lucky":[2,11],"unlucky":[4,8],"theme":"Master intuition — popular extension of 2"},
+      {"life_path":22,"lucky":[4,22],"unlucky":[5,9],"theme":"Master builder — popular extension of 4"},
+      {"life_path":33,"lucky":[6,33],"unlucky":[1,5],"theme":"Master teacher — popular extension of 6"}
+    ]
+  }
+}

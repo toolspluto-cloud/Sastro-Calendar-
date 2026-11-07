@@ -1,0 +1,125 @@
+{
+  "schema": "panchang.v1",
+  "description": "Panchang elements: tithi, vara, yoga, karana; daily-effect scoring notes; muhurat principles including Rahu Kaal.",
+  "sources": [
+    "https://www.astrogle.com/astrology/27-yogas-11-karanas-panchangam.html",
+    "https://panchangtime.com/methodology/rahu-kalam",
+    "https://panchangtime.com/methodology/karana",
+    "https://panchangtime.com/methodology/day-quality",
+    "https://panchangtime.com/methodology/inauspicious-periods",
+    "https://moonketu.com/learn/techniques/vimshottari-dasha",
+    "https://saravali.github.io/astrology/dasa_balance.html"
+  ],
+  "tithis": {
+    "description": "30 lunar days: 15 Shukla (waxing) + 15 Krishna (waning). Each = 12° Moon-Sun elongation.",
+    "names_shukla_or_krishna": [
+      {"num":1,"name":"Pratipada","class":"Nanda","effect_note":"Creative starts moderately favored"},
+      {"num":2,"name":"Dwitiya","class":"Bhadra","effect_note":"Steady progress; good for building"},
+      {"num":3,"name":"Tritiya","class":"Jaya","effect_note":"Victory-oriented; competitive tasks"},
+      {"num":4,"name":"Chaturthi","class":"Rikta","effect_note":"Empty/rikta — avoid new starts; ok for clearing"},
+      {"num":5,"name":"Panchami","class":"Purna","effect_note":"Full/auspicious for learning and growth"},
+      {"num":6,"name":"Shashthi","class":"Nanda","effect_note":"Creative and artistic"},
+      {"num":7,"name":"Saptami","class":"Bhadra","effect_note":"Steady work and travel"},
+      {"num":8,"name":"Ashtami","class":"Jaya","effect_note":"Intensity; some activities barred (esp. travel)"},
+      {"num":9,"name":"Navami","class":"Rikta","effect_note":"Rikta — avoid new auspicious starts"},
+      {"num":10,"name":"Dashami","class":"Purna","effect_note":"Favorable for completion and growth"},
+      {"num":11,"name":"Ekadashi","class":"Nanda","effect_note":"Spiritual fasting/worship favored"},
+      {"num":12,"name":"Dwadashi","class":"Bhadra","effect_note":"Good for sacred and steady tasks"},
+      {"num":13,"name":"Trayodashi","class":"Jaya","effect_note":"Victory and celebration themes"},
+      {"num":14,"name":"Chaturdashi","class":"Rikta","effect_note":"Rikta — avoid new starts; worship ok"},
+      {"num":15,"name":"Purnima (Shukla) / Amavasya (Krishna)","class":"Purna / special","effect_note":"Purnima: fullness/celebration; Amavasya: endings, ancestors — avoid most new starts"}
+    ],
+    "daily_scoring_high_level": "Prefer Nanda/Bhadra/Jaya/Purna for starts; penalize Rikta (4,9,14) and Amavasya for worldly beginnings. Prefer Shukla paksha for launches."
+  },
+  "vara": {
+    "description": "7 weekdays with planetary lords",
+    "days": [
+      {"weekday":"Sunday","lord":"Sun","favor":"Authority, government, leadership, vitality tasks"},
+      {"weekday":"Monday","lord":"Moon","favor":"Emotions, public, water, nurturing, travel short"},
+      {"weekday":"Tuesday","lord":"Mars","favor":"Courage, competition, surgery/land (caution); avoid for soft starts"},
+      {"weekday":"Wednesday","lord":"Mercury","favor":"Commerce, writing, study, deals"},
+      {"weekday":"Thursday","lord":"Jupiter","favor":"Teaching, finance, dharma, expansion"},
+      {"weekday":"Friday","lord":"Venus","favor":"Arts, relationships, luxury purchases, diplomacy"},
+      {"weekday":"Saturday","lord":"Saturn","favor":"Discipline, labor, service; avoid for finance starts in many lists"}
+    ]
+  },
+  "yogas": [
+    {"num":1,"name":"Vishkambha","effect":"Support/victory over obstacles; prevails"},
+    {"num":2,"name":"Priti","effect":"Fondness, likability, contentment"},
+    {"num":3,"name":"Ayushman","effect":"Longevity, energy, good health tone"},
+    {"num":4,"name":"Saubhagya","effect":"Good fortune, comfort, opportunity"},
+    {"num":5,"name":"Shobhana","effect":"Splendor, attractiveness"},
+    {"num":6,"name":"Atiganda","effect":"Obstacles/danger — inauspicious classically"},
+    {"num":7,"name":"Sukarma","effect":"Virtuous deeds, charity, noble work"},
+    {"num":8,"name":"Dhriti","effect":"Determination; enjoyment of others' hospitality"},
+    {"num":9,"name":"Shula","effect":"Spear/pain — confrontational; inauspicious"},
+    {"num":10,"name":"Ganda","effect":"Danger/obstacles — inauspicious"},
+    {"num":11,"name":"Vriddhi","effect":"Growth, intelligence, improvement with age"},
+    {"num":12,"name":"Dhruva","effect":"Steadiness, concentration, persistence"},
+    {"num":13,"name":"Vyaghata","effect":"Beating/cruelty tone — inauspicious"},
+    {"num":14,"name":"Harshana","effect":"Joy, humor, intelligence"},
+    {"num":15,"name":"Vajra","effect":"Forceful, unpredictable; diamond strength"},
+    {"num":16,"name":"Siddhi","effect":"Success, skill, accomplishment"},
+    {"num":17,"name":"Vyatipata","effect":"Calamity/reversals — strongly inauspicious"},
+    {"num":18,"name":"Variyan","effect":"Comfort/luxury inclination; can be lazy"},
+    {"num":19,"name":"Parigha","effect":"Obstruction — inauspicious"},
+    {"num":20,"name":"Shiva","effect":"Auspicious, honored, learned"},
+    {"num":21,"name":"Siddha","effect":"Accomplished, pleasant, spiritual interest"},
+    {"num":22,"name":"Sadhya","effect":"Amenable, well-mannered"},
+    {"num":23,"name":"Shubha","effect":"Auspicious, lustrous; watch health"},
+    {"num":24,"name":"Shukla","effect":"Bright; flighty/impulsive mind"},
+    {"num":25,"name":"Brahma","effect":"Trustworthy, ambitious, good judgment"},
+    {"num":26,"name":"Indra","effect":"Leadership interest in knowledge; helpful"},
+    {"num":27,"name":"Vaidhriti","effect":"Poor support — critically inauspicious"}
+  ],
+  "yoga_calculation": "(Sun longitude + Moon longitude) / 13°20' → yoga number 1–27",
+  "inauspicious_yogas_classic": ["Atiganda","Shula","Ganda","Vyaghata","Vyatipata","Parigha","Vaidhriti"],
+  "karanas": {
+    "movable": [
+      {"name":"Bava","effect":"Kind, content; military/service themes"},
+      {"name":"Balava","effect":"Courageous, sports, extracurricular energy"},
+      {"name":"Kaulava","effect":"Mixed character; caution in classical texts"},
+      {"name":"Taitila","effect":"Even-tempered, strong convictions"},
+      {"name":"Gara","effect":"Strategic, imaginative, talkative"},
+      {"name":"Vanija","effect":"Business acumen; trade-friendly"},
+      {"name":"Vishti (Bhadra)","effect":"AVOID for auspicious worldly beginnings"}
+    ],
+    "fixed": [
+      {"name":"Shakuni","effect":"Calm, intuitive; special dark-fortnight uses"},
+      {"name":"Chatushpada","effect":"Independent business; cattle/four-footed themes"},
+      {"name":"Naga","effect":"Mineral/specialist; subversive Amavasya uses"},
+      {"name":"Kimstughna","effect":"Opens Shukla Pratipada; Vaisvadeva yoga when so placed"}
+    ],
+    "calculation": "Half-tithi = 6° Moon-Sun elongation; 60 karanas per lunar month"
+  },
+  "vimshottari_dasha": {
+    "total_years": 120,
+    "period_years": {"Ketu":7,"Venus":20,"Sun":6,"Moon":10,"Mars":7,"Rahu":18,"Jupiter":16,"Saturn":19,"Mercury":17},
+    "sequence": ["Ketu","Venus","Sun","Moon","Mars","Rahu","Jupiter","Saturn","Mercury"],
+    "algorithm_steps": [
+      "Inputs: birth date, time, place → compute sidereal Moon longitude (needs ephemeris + ayanamsa, commonly Lahiri). Do NOT invent live positions without an ephemeris.",
+      "Nakshatra length = 360/27 = 13°20' (13.333...°).",
+      "nakshatra_index = floor(moon_longitude / 13.333...) ; lord = sequence[nakshatra_index % 9].",
+      "fraction_elapsed = (moon_longitude - nakshatra_start) / 13.333...",
+      "balance_years = (1 - fraction_elapsed) * lord_period_years.",
+      "Subsequent mahadashas follow the fixed sequence for full periods.",
+      "Antardasha: same 9-lord order starting from mahadasha lord; duration = (MD_years * AD_years) / 120."
+    ],
+    "commercial_flag": "Dasha predictions marketed as fact need a licensed/credentialed Jyotishi; birth-time rectification is expert work. App may show algorithm and tables only."
+  },
+  "rahu_kaal": {
+    "method": "Split sunrise→sunset into 8 equal parts; weekday selects which part is Rahu Kaal.",
+    "weekday_part": {"Monday":2,"Tuesday":7,"Wednesday":5,"Thursday":6,"Friday":4,"Saturday":3,"Sunday":8},
+    "also_avoid_eighths": {"Yamaganda":"weekday-fixed eighth","Gulika":"weekday-fixed eighth"},
+    "note": "Avoid beginning auspicious work in Rahu Kaal; already-started work may continue. Times are local daylight-dependent — never hardcode clock ranges."
+  },
+  "muhurat_principles": [
+    "Prefer waxing Moon (Shukla paksha) for starts and launches.",
+    "Avoid Vishti/Bhadra karana for worldly auspicious beginnings.",
+    "Avoid Rikta tithis (4, 9, 14) and Amavasya for most new starts.",
+    "Avoid classic inauspicious yogas (Atiganda, Shula, Ganda, Vyaghata, Vyatipata, Parigha, Vaidhriti).",
+    "Subtract Rahu Kaal, Yamaganda, Gulika, Varjyam, Dur Muhurtam from candidate windows.",
+    "Match weekday lord to activity (e.g., Wednesday/Thursday/Friday for finance/deals; avoid Saturday for finance starts in many lists).",
+    "Prefer supportive nakshatras for the activity type (see activity tables in sources)."
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "schema": "photo-handling-rules.v1",
+  "description": "Image-only input quality gates for palmistry, face reading, and handwriting photos: detect failures, retake vs lower-confidence, warm phrasing, privacy.",
+  "commercial_flags": [
+    "Biometric/face data is sensitive PII — disclose retention, purpose limitation, and deletion in privacy policy.",
+    "Never claim medical diagnosis from face/palm photos.",
+    "Palm/face/handwriting readings from photos are entertainment/symbolic unless a licensed professional reviews."
+  ],
+  "sources": [
+    "https://www.handfortune.com/en/guides/hand-photo-guide",
+    "https://palmyst.com/app/tips",
+    "https://www.heartmap.io/palm-photo-guide",
+    "https://www.palmmingle.com/ai-palmistry",
+    "https://palmvisionai.com/articles/palm-reading-from-photos-accuracy",
+    "https://www.faceiqlabs.com/support/photos",
+    "https://www.physiognomy.ai/image-guidelines",
+    "https://fiswg.org/FISWG_Guide_for_Capturing_Facial_Images_for_FR_Use_v2.0_20190510.pdf",
+    "https://scanbot.io/blog/enhanced-document-quality-analyzer/",
+    "https://help.didit.me/documents-coverage/document-upload-problems",
+    "https://www.wavemist.io/reading"
+  ],
+  "palmistry_photos": {
+    "minimum_quality_to_read_major_lines": {
+      "required_visible": ["heart_line_region", "head_line_region", "life_line_region"],
+      "fate_line": "Optional; often faint — do not fail solely on missing fate line",
+      "resolution": "Prefer native phone resolution; avoid heavy compression/beauty filters that erase creases",
+      "focus": "Sharp across full palm (not only fingertips)",
+      "lighting": "Even, diffuse daylight or soft lamp; no direct flash washout; no hard shadows mistaken for breaks",
+      "framing": "Wrist crease through all fingertips; palm fills most of frame; camera parallel/overhead ~forearm length",
+      "pose": "Palm flat/open, fingers slightly spread, no sharp bend toward lens; one hand only",
+      "obstructions": "Remove rings/bracelets covering joints/lines; clean ink/dirt; no overlapping second hand"
+    },
+    "failure_detectors": [
+      {"code":"BLUR","detect":"Laplacian/variance or text/crease sharpness below threshold across palm center","action":"retake"},
+      {"code":"PARTIAL_PALM","detect":"Missing wrist, fingertips, or >20% palm cropped","action":"retake"},
+      {"code":"WRONG_ANGLE","detect":"Strong foreshortening / camera not roughly parallel to palm plane","action":"retake"},
+      {"code":"COVERED_LINES","detect":"Jewelry, ink, bandage, or finger overlap occluding major crease regions","action":"retake"},
+      {"code":"GLARE_SHADOW","detect":"Specular highlights or deep shadows over line regions","action":"retake"},
+      {"code":"FILTERED","detect":"Beauty/smoothing filter suspected (over-smooth skin texture)","action":"retake"},
+      {"code":"MULTI_HAND","detect":"More than one hand in frame","action":"retake"},
+      {"code":"LOW_CONTRAST_BG","detect":"Hand blends into background","action":"warn_or_retake"}
+    ],
+    "retake_guidance": [
+      "Spread fingers slightly; rest palm flat on a non-reflective contrasting surface.",
+      "Shoot straight overhead (camera parallel to palm), not from an angle.",
+      "Use even daylight; turn beauty filters and flash off; tap to focus on palm center.",
+      "Include wrist crease to fingertips; remove jewelry that covers lines.",
+      "Hold still for a second so creases stay sharp."
+    ],
+    "both_hands_note": "Prefer left and right; tradition often contrasts non-dominant (disposition) vs dominant (developed). Optional side view for finger proportions."
+  },
+  "face_reading_photos": {
+    "requirements": {
+      "pose": "Front-facing, head level, eyes to camera, neutral expression, lips relaxed",
+      "framing": "Face centered; forehead to chin visible; ears preferably visible; face ~70–80% of crop when possible",
+      "distance": "Prefer rear camera ~1–2 m with 2–3× zoom to reduce wide-angle distortion; avoid extreme close selfie distortion",
+      "lighting": "Even soft light (face a window); no harsh side/overhead shadows; no blown highlights",
+      "background": "Plain, contrasting, no clutter",
+      "expression": "Neutral preferred; mild smile ok; avoid exaggerated expressions"
+    },
+    "interference": [
+      {"factor":"glasses","effect":"Frames/reflections hide canthi and brow landmarks","policy":"Ask to remove if safe/comfortable; if kept: no tint, no flash reflection, frames not covering eyes — lower confidence"},
+      {"factor":"beard_mustache","effect":"Can obscure jaw/lip landmarks","policy":"Allow with lower confidence on jaw-related cues; do not demand shaving"},
+      {"factor":"heavy_makeup","effect":"Can alter perceived proportions and skin texture","policy":"Warn that reading is of presented appearance; lower confidence on texture cues"},
+      {"factor":"hat_mask_hair_over_face","effect":"Occludes forehead/eyes/jaw","policy":"Retake — ask to clear face (religious head covering exception: keep covering but show chin-to-forehead features as feasible)"},
+      {"factor":"filters_beauty_mode_HDR_halos","effect":"Distorts ratios","policy":"Retake with filters off"}
+    ],
+    "failure_detectors": [
+      {"code":"NOT_FRONTAL","detect":"Yaw/pitch/roll beyond ~15°","action":"retake"},
+      {"code":"PARTIAL_FACE","detect":"Eyes, nose, or mouth missing from crop","action":"retake"},
+      {"code":"BLUR","detect":"Face landmarks soft","action":"retake"},
+      {"code":"BAD_LIGHT","detect":"Uneven illumination / silhouette","action":"retake"},
+      {"code":"OCCLUDED","detect":"Mask, hand, heavy bangs over eyes","action":"retake"},
+      {"code":"MULTI_FACE","detect":"More than one face","action":"retake_ask_solo"}
+    ]
+  },
+  "handwriting_photos": {
+    "legibility_thresholds": {
+      "accept_auto": "Quality grade excellent or good (sharp characters across sampled text boxes)",
+      "accept_low_confidence": "Grade reasonable — proceed with explicit lower-confidence banner",
+      "reject_retake": "Grade poor or very poor; or critical fields unreadable"
+    },
+    "cursive_vs_print": {
+      "print": "Generally higher OCR confidence; prefer for name/number extraction",
+      "cursive": "Allow but raise uncertainty; if agreement across readers is low, ask for print rewrite or typed confirm",
+      "mixed": "Score per region; retake only regions that fail"
+    },
+    "paper_background_issues": [
+      "Lined/graph paper bleed into glyphs — warn or enhance carefully",
+      "Patterned/dark paper low contrast — retake on plain light paper",
+      "Glare from glossy paper or plastic sleeve — retake without sleeve",
+      "Shadows across page — retake with even light",
+      "Cropped margins / missing corners — retake with full page in frame",
+      "Upside-down / rotated — auto-orient via EXIF then content; confirm with user if uncertain"
+    ],
+    "failure_detectors": [
+      {"code":"BLUR","action":"retake"},
+      {"code":"TOO_DARK_OR_BRIGHT","action":"retake"},
+      {"code":"GLARE","action":"retake"},
+      {"code":"LOW_CONTRAST","action":"retake"},
+      {"code":"TEXT_TOO_SMALL","action":"retake_move_closer"},
+      {"code":"PARTIAL_PAGE","action":"retake"}
+    ]
+  },
+  "general_rules": {
+    "blur_detection": {
+      "approach": "Compute sharpness (e.g. Laplacian variance) on ROI (palm center / face box / text boxes). Combine with exposure and glare checks.",
+      "suggested_bands": {
+        "pass": "sharpness >= high_threshold AND exposure in mid range AND glare_ratio < low",
+        "soft_warn": "between thresholds — offer continue with lower confidence",
+        "fail": "below low_threshold — force retake"
+      },
+      "note": "Absolute numeric thresholds are device/model-specific; calibrate on your model. Do not hardcode a universal Laplacian number without validation."
+    },
+    "retake_vs_lower_confidence": {
+      "force_retake": ["BLUR fail", "PARTIAL subject", "WRONG_ANGLE severe", "OCCLUDED major landmarks", "FILTERED beauty mode", "MULTI subject when single required"],
+      "allow_lower_confidence": ["mild shadow", "glasses kept", "beard obscuring jaw only", "handwriting grade reasonable", "fate line invisible but other lines clear"],
+      "retry_cap": "After 3 rejections, accept last image with strong low-confidence banner so users are never permanently blocked (document-capture UX pattern)."
+    },
+    "warm_retake_phrasing": {
+      "principles": [
+        "Blame the photo conditions, never the person.",
+        "One specific fix per message.",
+        "Encourage: this is entertainment setup, not a test you can fail.",
+        "Offer tip illustration when possible."
+      ],
+      "templates": [
+        "Almost there — the palm is a bit soft/blurry. Hold still and tap the center of your palm to focus, then try one more shot.",
+        "We can't see the whole hand yet. Scoot back a little so your wrist and fingertips are both in frame.",
+        "The angle is squashing the lines. Hover the camera straight above your palm like a bird's-eye view.",
+        "There's a bright glare on the lines. Turn off the flash and face a window for soft light.",
+        "Filters can smooth away the creases we read. Switch to the plain camera (no beauty mode) and shoot again.",
+        "For face reading, look straight at the lens with a relaxed face — a slight smile is fine; tilt makes the ratios harder to read.",
+        "If you're comfortable removing glasses for this photo, the eye area reads more clearly. If not, we'll continue with a gentler confidence note.",
+        "The writing is a little hard to make out. A closer, sharper photo on plain paper (or printing the same words) helps a lot."
+      ]
+    },
+    "privacy": {
+      "principles": [
+        "Collect only for the stated reading purpose.",
+        "Encrypt in transit and at rest.",
+        "Default short retention: delete raw images after analysis completes unless user opts into save/history.",
+        "No secondary use (ads, training sale) without explicit opt-in consent.",
+        "Provide in-app delete and export of stored images.",
+        "Face/palm biometrics are sensitive — disclose in privacy policy and regional compliance (e.g. GDPR special category where applicable).",
+        "On-device preprocessing preferred when feasible; minimize server retention.",
+        "Never display another user's images; isolate by account."
+      ],
+      "user_copy_example": "Your photo is used only to generate this reading. We delete the image after analysis unless you save it to your history. You can delete saved photos anytime."
+    }
+  }
+}

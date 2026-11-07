@@ -1,0 +1,23 @@
+{
+  "schema": "bhavas.v1",
+  "description": "12 Vedic bhavas (houses) with Sanskrit names and life-area keywords.",
+  "sources": [
+    "https://www.shreekundli.com/vedic-astrology/houses",
+    "https://satyori.com/jyotish/articles/twelve-houses-overview/",
+    "https://nityapanchangam.com/astrology/12-houses-bhavas/"
+  ],
+  "bhavas": [
+    {"num":1,"sanskrit":"Tanu","english":"Ascendant / Self","keywords":"Body, personality, vitality, appearance, self-expression, beginnings"},
+    {"num":2,"sanskrit":"Dhana","english":"Wealth","keywords":"Wealth, family, speech, food, early resources, face/mouth"},
+    {"num":3,"sanskrit":"Sahaja","english":"Siblings / Courage","keywords":"Siblings, courage, short travel, effort, communication, skills, hands"},
+    {"num":4,"sanskrit":"Sukha","english":"Home / Happiness","keywords":"Mother, home, emotional comfort, property, vehicles, education roots"},
+    {"num":5,"sanskrit":"Putra","english":"Children / Intellect","keywords":"Children, creativity, intelligence, romance, speculation, mantra, past merit"},
+    {"num":6,"sanskrit":"Ari / Ripu","english":"Enemies / Service","keywords":"Disease, debts, enemies, daily work, service, competition, pets"},
+    {"num":7,"sanskrit":"Yuvati / Kalatra","english":"Partnership","keywords":"Spouse, business partners, contracts, open enemies, desire, public dealing"},
+    {"num":8,"sanskrit":"Randhra / Ayus","english":"Longevity / Transformation","keywords":"Longevity, sudden change, occult, inheritance, shared resources, research"},
+    {"num":9,"sanskrit":"Dharma","english":"Fortune / Dharma","keywords":"Fortune, father, guru, higher learning, dharma, long travel, grace"},
+    {"num":10,"sanskrit":"Karma","english":"Career / Status","keywords":"Career, status, fame, authority, public action, government, achievement"},
+    {"num":11,"sanskrit":"Labha","english":"Gains","keywords":"Gains, friends, networks, elder siblings, aspirations, income from career"},
+    {"num":12,"sanskrit":"Vyaya","english":"Loss / Liberation","keywords":"Expenditure, loss, foreign lands, isolation, sleep, moksha, charity, bed pleasures"}
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "schema": "moments.v1",
+  "description": "Life moments people ask Satro about. Themes come from public reporting on Gen Z dating anxiety, career worry and astrology-app questions. Match order matters: specific moments first.",
+  "disclaimer": "Traditional/symbolic guidance for fun and reflection. You make the call.",
+  "moments": [
+    {
+      "id": "make-up", "soon": true, "group": "Love", "emoji": "🤍", "label": "Make up after a fight",
+      "question": "Good time to fix things after a fight?",
+      "match": "\\b(fight|fought|argu\\w*|patch up|make up|apolog\\w*|say sorry|mad at me|angry at me)\\b",
+      "domain": "romance", "hours": [17, 22],
+      "tips": ["Start with how you feel, not who was right.", "Ask what they needed in that moment, then really listen.", "Pick a calm moment and put the phones down."],
+      "note": "If a fight ever leaves you feeling unsafe, please reach out to someone you trust."
+    },
+    {
+      "id": "text-first", "soon": true, "group": "Love", "emoji": "💬", "label": "Text them first",
+      "question": "Should I text them first?",
+      "match": "\\b(text(ing)? (him|her|them|first|back)|double text|dm (him|her|them)|message (him|her|them)|left on read|reply to (him|her|them))\\b",
+      "domain": "romance", "hours": [12, 22],
+      "tips": ["Keep it light: one easy line beats a long paragraph.", "Say what you actually mean. No decoding games.", "Send it, then go enjoy your day."]
+    },
+    {
+      "id": "confess", "group": "Love", "emoji": "💌", "label": "Tell your crush",
+      "question": "When should I tell my crush?",
+      "match": "\\b(confess\\w*|crush|shoot my shot|ask (him|her|them) out|tell (him|her|them) i like|my feelings)\\b",
+      "domain": "romance", "hours": [16, 21],
+      "tips": ["Keep it simple: \"I like spending time with you.\"", "Give them room to answer in their own time.", "Being brave already counts as a win."]
+    },
+    {
+      "id": "first-date", "group": "Love", "emoji": "🌹", "label": "First date",
+      "question": "Best time for a first date?",
+      "match": "\\b(first date|on a date|plan a date|a date(?! night))\\b",
+      "domain": "romance", "hours": [17, 21],
+      "tips": ["Pick a spot where you can actually talk.", "Have one fun question ready to break the ice.", "Be curious, not perfect."]
+    },
+    {
+      "id": "romantic-vibe", "group": "Love", "emoji": "🌙", "label": "Romantic night",
+      "question": "When's the most romantic time?",
+      "match": "\\b(romantic|romance|date night|anniversary|cuddle|love vibe|quality time)\\b",
+      "domain": "romance", "hours": [18, 23],
+      "tips": ["Small and thoughtful beats big and expensive.", "Phones away for the first hour.", "Plan one little surprise."]
+    },
+    {
+      "id": "find-love", "group": "Love", "emoji": "✨", "label": "Meet someone new",
+      "question": "When can I find love?",
+      "match": "\\b(find (a |my |true )?(lover?|partner|bf|gf|boyfriend|girlfriend|someone|soulmate|the one)|still single|meet someone|dating apps?|hinge|tinder|bumble)\\b",
+      "domain": "social", "hours": [17, 22],
+      "lead": "I can't promise when love shows up, but I can show you the best time to put yourself out there.",
+      "tips": ["Say yes to one plan you'd normally skip.", "Refresh one photo and one line on your profile.", "Go where your people already are."]
+    },
+    {
+      "id": "the-talk", "group": "Love", "emoji": "🫶", "label": "Have \"the talk\"",
+      "question": "When do I ask what we are?",
+      "match": "\\b(situationship|what are we|what we are|define the relationship|dtr|the talk|exclusive|talking stage)\\b",
+      "domain": "romance", "hours": [16, 21],
+      "tips": ["Say what you want, not what you think they want.", "\"I'm looking for...\" is a great way to start.", "Their answer is clarity, whichever way it goes."]
+    },
+    {
+      "id": "move-on", "soon": true, "group": "Love", "emoji": "🌱", "label": "Heal and move on",
+      "question": "I'm going through a breakup. What helps today?",
+      "match": "\\b(break ?up|broke up|end (it|things)|move on|moving on|ghost\\w*|my ex|heartbreak\\w*|miss (him|her|them))\\b",
+      "domain": "rest", "hours": [8, 21],
+      "lead": "That really hurts, and it makes sense that you're feeling it. Be extra kind to yourself.",
+      "tips": ["Mute before you block. Give yourself some space.", "Call the friend who always gets it.", "Move your body a little, even just a walk."]
+    },
+    {
+      "id": "family-talk", "group": "Family", "emoji": "🏡", "label": "Talk to family",
+      "question": "Good time for a big family talk?",
+      "match": "\\b(marriage|get(ting)? married|propos\\w*|rishta|my (mom|mum|dad|parents|family|sister|brother)|family talk)\\b",
+      "domain": "family", "hours": [10, 21],
+      "tips": ["Start with what you appreciate about them.", "Pick a relaxed moment, ideally after a meal.", "Listen first, then share your side."]
+    },
+    {
+      "id": "night-out", "group": "Friends", "emoji": "🥂", "label": "Girls' night out",
+      "question": "Best time for a night out with friends?",
+      "match": "\\b(girls'? (night|out|outing|trip)|boys'? (night|out|trip)|outing|night out|hang ?out|party|my friends?|squad|besties?)\\b",
+      "domain": "social", "hours": [18, 23],
+      "tips": ["Pick the plan and the time now, or the group chat never will.", "Take the photos early, while everyone still looks amazing.", "Sort your ride home before you head out."]
+    },
+    {
+      "id": "interview", "group": "Work", "emoji": "💼", "label": "Job interview",
+      "question": "Best time to prep for my interview?",
+      "match": "\\binterviews?\\b",
+      "domain": "career", "hours": [9, 18], "fixed": true,
+      "tips": ["Practice your \"tell me about yourself\" out loud twice.", "Prepare two stories that show what you can do.", "Bring two questions of your own."]
+    },
+    {
+      "id": "big-meeting", "group": "Work", "emoji": "📊", "label": "Big meeting or pitch",
+      "question": "When should I schedule my big meeting?",
+      "match": "\\b(meetings?|pitch\\w*|present\\w*|client|investors?|business deal)\\b",
+      "domain": "career", "hours": [9, 18],
+      "tips": ["Open with the one thing you want them to remember.", "Keep it short and leave time for questions.", "Share the next step before everyone leaves."]
+    },
+    {
+      "id": "ask-raise", "group": "Work", "emoji": "🚀", "label": "Ask for a raise",
+      "question": "When should I ask for a raise?",
+      "match": "\\b(raise|salary|promotion|appraisal|talk to my boss|hike)\\b",
+      "domain": "career", "hours": [10, 17],
+      "tips": ["Bring three wins with real results.", "Know your number before you walk in.", "Ask for a quick chat rather than ambushing them."]
+    },
+    {
+      "id": "job-hunt", "group": "Work", "emoji": "🌟", "label": "Job hunt",
+      "question": "When will I get a job?",
+      "match": "\\b(jobs?|apply|applying|resume|cv|quit|career|layoff|laid off)\\b",
+      "domain": "career", "hours": [9, 18],
+      "lead": "I can't promise a date, but I can point you to your best time to go for it.",
+      "tips": ["Send three tailored applications instead of thirty copies.", "Message one person in a company you like.", "Celebrate the effort. Results follow in their own time."]
+    },
+    {
+      "id": "launch", "group": "Work", "emoji": "🎉", "label": "Start something new",
+      "question": "Good time to start something new?",
+      "match": "\\b(launch\\w*|start(ing)? (a |my )?(business|startup|project)|start(ing)? something|something new|side hustle|go live|new venture)\\b",
+      "domain": "creativity", "hours": [9, 20],
+      "tips": ["Start small enough that you can begin today.", "Share it with one person you trust first.", "Done and live beats perfect and hidden."]
+    },
+    {
+      "id": "exam", "group": "Study", "emoji": "📚", "label": "Exam prep",
+      "question": "Best time to study for my exam?",
+      "match": "\\b(exams?|tests?|finals?|midterms?|boards?|revis\\w*|results? day)\\b",
+      "domain": "focus", "hours": [7, 21], "fixed": true,
+      "tips": ["Try 25 minutes of focus, then a 5 minute break.", "Test yourself instead of rereading notes.", "Sleep counts as studying. Really."]
+    },
+    {
+      "id": "study", "group": "Study", "emoji": "🧠", "label": "Deep study session",
+      "question": "When's my best focus time?",
+      "match": "\\b(study|studying|assignment|homework|deep work|focus|concentrate|procrastinat\\w*)\\b",
+      "domain": "focus", "hours": [7, 21],
+      "tips": ["Put your phone in another room.", "Pick one task and do only that.", "Start with just five minutes."]
+    },
+    {
+      "id": "money", "group": "Life", "emoji": "💸", "label": "Big money move",
+      "question": "Good time for a big purchase?",
+      "match": "\\b(money|invest\\w*|buy|buying|purchase|spend\\w*|stocks?|crypto|loan)\\b",
+      "domain": "money", "hours": [10, 18],
+      "tips": ["Sleep on anything big for one night.", "Compare at least two options.", "Set your budget before you browse."],
+      "note": "For real money decisions, check with a qualified professional."
+    },
+    {
+      "id": "gym", "soon": true, "group": "Life", "emoji": "💪", "label": "Workout",
+      "question": "Best time to work out today?",
+      "match": "\\b(gym|workout|work out|exercise|run|running|yoga|fitness)\\b",
+      "domain": "health", "hours": [6, 20],
+      "tips": ["Ten minutes still counts.", "Play the song that makes you feel unstoppable.", "Drink some water first."]
+    },
+    {
+      "id": "travel", "group": "Life", "emoji": "✈️", "label": "Trip or travel",
+      "question": "Good time for a trip?",
+      "match": "\\b(travel\\w*|trip|vacation|holiday|flight|road trip)\\b",
+      "domain": "travel", "hours": [7, 20],
+      "tips": ["Leave a little earlier than you think you need to.", "Pack the night before.", "Save your tickets offline."]
+    },
+    {
+      "id": "reset", "soon": true, "group": "Life", "emoji": "🫧", "label": "Reset and recharge",
+      "question": "I'm feeling drained. When can I recharge?",
+      "match": "\\b(tired|drained|burn(t|ed)? ?out|overwhelm\\w*|stress\\w*|anxious|anxiety|sad|lonely|recharge|reset|self.?care|rest)\\b",
+      "domain": "rest", "hours": [8, 23],
+      "lead": "Thanks for telling me. Slowing down is a good move, not a step back.",
+      "tips": ["Take ten slow breaths, right now.", "Step outside for a few minutes.", "Tell one person how you're really doing."]
+    }
+  ]
+}

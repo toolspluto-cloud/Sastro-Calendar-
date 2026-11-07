@@ -1,0 +1,79 @@
+{
+  "schema": "meeting-prep-rules.v1",
+  "description": "Rule engine comparing two people (charts or birth-date + name numbers) to emit 1–10 practical pitching/talking suggestions. Traditional/symbolic — not predictive certainty.",
+  "commercial_flags": [
+    "Cap all output as traditional/symbolic guidance for entertainment/education.",
+    "Do not claim guaranteed deal outcomes or mind-reading."
+  ],
+  "sources": [
+    "https://navagraha.app/rashi/",
+    "https://karmawheel.app/docs/the-twelve-signs",
+    "https://numerologywise.com/pythagorean-numerology/",
+    "https://paramarsh.app/patrika/palmistry/palmistry-complete-guide"
+  ],
+  "inputs": {
+    "preferred": ["moon_rashi_or_lagna", "life_path", "ruling_planet_weekday_affinity", "venus_or_7th_house_themes_high_level", "optional_hand_shape"],
+    "fallback_minimum": ["birth_date → life_path + weekday affinity", "full_name → expression/soul_urge"]
+  },
+  "comparison_features": [
+    {"feature":"same_element","detect":"both Fire|Earth|Air|Water","weight":"high"},
+    {"feature":"compatible_elements","detect":"Fire+Air or Earth+Water","weight":"medium"},
+    {"feature":"challenging_elements","detect":"Fire+Water or Earth+Air","weight":"medium"},
+    {"feature":"same_quality","detect":"both Movable|Fixed|Dual","weight":"low"},
+    {"feature":"life_path_match","detect":"equal life paths","weight":"medium"},
+    {"feature":"life_path_8_counterpart","detect":"other has LP 8","weight":"high"},
+    {"feature":"life_path_2_or_6_counterpart","detect":"other has LP 2 or 6","weight":"medium"},
+    {"feature":"life_path_5_counterpart","detect":"other has LP 5","weight":"medium"},
+    {"feature":"life_path_7_counterpart","detect":"other has LP 7","weight":"medium"},
+    {"feature":"weekday_affinity_overlap","detect":"shared favored weekday lords","weight":"low"},
+    {"feature":"venusian_counterpart","detect":"other Venus-ruled or strong Venus themes","weight":"medium"},
+    {"feature":"martial_counterpart","detect":"other Mars-ruled","weight":"medium"}
+  ],
+  "rule_engine": [
+    {"if":"same_element","emit":"Open with shared values and a story they will recognize; rapport should come quickly — still verify assumptions aloud."},
+    {"if":"compatible_elements","emit":"Lean into complementary strengths: idea energy (Fire/Air) or practical care (Earth/Water). Explicitly assign who drives vision vs who grounds it."},
+    {"if":"challenging_elements","emit":"Slow the pace. Lead with empathy and concrete examples; avoid steamrolling (Fire) or vague abstraction (Air) against a Water/Earth style."},
+    {"if":"same_quality == Fixed","emit":"Come with a clear proposal; Fixed types dislike sudden pivots mid-meeting. Ask for decisions with time to settle."},
+    {"if":"same_quality == Movable","emit":"Keep momentum: short agenda, next steps, and a decision window. Movable signs prefer starts over long debate."},
+    {"if":"same_quality == Dual","emit":"Offer options (A/B) rather than one ultimatum; Dual signs process by comparing paths."},
+    {"if":"life_path_8_counterpart","emit":"Lead with results, ROI, timelines, and risk controls. LP 8 respects competence and measurable outcomes."},
+    {"if":"life_path_2_or_6_counterpart","emit":"Emphasize partnership language, care for stakeholders, and how the deal supports people — not only metrics."},
+    {"if":"life_path_5_counterpart","emit":"Keep it lively and flexible; highlight variety, autonomy, and escape from rigid process."},
+    {"if":"life_path_7_counterpart","emit":"Bring depth: data, quiet space to think, fewer flashy claims. Allow silence after key points."},
+    {"if":"life_path_1_counterpart","emit":"Respect their need to lead; frame suggestions as tools for their vision, not instructions."},
+    {"if":"life_path_3_counterpart","emit":"Use vivid language, humor, and creative framing; avoid dry spreadsheets-only pitches."},
+    {"if":"life_path_4_counterpart","emit":"Show structure, process, and reliability; over-prepare logistics."},
+    {"if":"life_path_9_counterpart","emit":"Connect the ask to a larger purpose or community benefit."},
+    {"if":"venusian_counterpart","emit":"Mind aesthetics: polished deck, pleasant setting, gracious tone. Soften hard-sell language."},
+    {"if":"martial_counterpart","emit":"Be direct, time-boxed, and ready for challenge questions. Avoid fluff."},
+    {"if":"weekday_affinity_overlap","emit":"Prefer scheduling on a shared favorable weekday (e.g., both Mercury/Jupiter/Venus friendly) when possible."},
+    {"if":"hand_shape_Fire_vs_Water","emit":"If palm cues available: Fire energy vs Water sensitivity — check emotional temperature before pushing close."},
+    {"always":true,"emit_cap":"Generate 1–10 suggestions ranked by weight; never invent specific future events. Cap with: 'Traditional/symbolic guidance — not predictive certainty.'"}
+  ],
+  "worked_example": {
+    "people": [
+      {"name":"Asha (fictional)","moon_rashi":"Simha (Fire, Fixed)","life_path":8,"weekday_affinity":["Sunday","Tuesday"],"notes":"Venus not strongly highlighted"},
+      {"name":"Dev (fictional)","moon_rashi":"Karka (Water, Movable)","life_path":2,"weekday_affinity":["Monday","Friday"],"notes":"Venusian lean via Friday affinity"}
+    ],
+    "detected_features": ["challenging_elements (Fire+Water)","life_path_8_counterpart for Dev talking to Asha","life_path_2_or_6 for Asha talking to Dev","venusian_counterpart for Asha"],
+    "sample_suggestions_for_Dev_pitching_Asha": [
+      "1. Lead with results, ROI, and a clear timeline — Asha's Life Path 8 rewards measurable outcomes.",
+      "2. Slow the emotional pace: Fire+Water clash — start with a human check-in before hard numbers.",
+      "3. Be direct and time-boxed; Simha/Mars-adjacent energy dislikes fluff.",
+      "4. Bring a polished one-pager (Venusian courtesy still helps even if she is results-first).",
+      "5. Avoid sudden mid-meeting pivots; Fixed Moon prefers a settled proposal.",
+      "6. Offer a decision window rather than forcing an instant yes.",
+      "7. Schedule outside her stress windows; prefer Sunday/Tuesday affinity if calendars allow.",
+      "8. Frame the ask as amplifying her leadership vision, not replacing it.",
+      "9. Keep risk controls visible — LP 8 listens harder when downside is named.",
+      "10. Cap: traditional/symbolic guidance only — not predictive certainty."
+    ],
+    "sample_suggestions_for_Asha_pitching_Dev": [
+      "1. Use partnership language and stakeholder care — Dev's Life Path 2 values relationship tone.",
+      "2. Soften hard-sell; prefer gracious framing and aesthetic clarity (Friday/Venus lean).",
+      "3. Allow emotional context; Water Moon hears safety before speed.",
+      "4. Movable Moon: keep next steps light and iterative rather than one rigid plan.",
+      "5. Prefer Monday/Friday meeting slots when possible."
+    ]
+  }
+}

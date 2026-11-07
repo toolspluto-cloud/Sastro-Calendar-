@@ -1,0 +1,23 @@
+{
+  "schema": "rashis.v1",
+  "description": "12 Vedic rashis (sidereal signs) with ruling planets, elements, qualities, body parts, keywords.",
+  "sources": [
+    "https://navagraha.app/rashi/",
+    "https://karmawheel.app/docs/the-twelve-signs",
+    "https://paramarsh.app/patrika/astrology-ayurveda/rashis-body-parts-classical"
+  ],
+  "rashis": [
+    {"num":1,"sanskrit":"Mesha","english":"Aries","ruling_planet":"Mars","element":"Fire","quality":"Movable (Chara)","body_part":"Head","keywords":"Initiative, courage, speed, headstrong action"},
+    {"num":2,"sanskrit":"Vrishabha","english":"Taurus","ruling_planet":"Venus","element":"Earth","quality":"Fixed (Sthira)","body_part":"Face, neck, throat","keywords":"Stability, sensuality, accumulation, endurance"},
+    {"num":3,"sanskrit":"Mithuna","english":"Gemini","ruling_planet":"Mercury","element":"Air","quality":"Dual (Dvisvabhava)","body_part":"Shoulders, arms, hands, lungs","keywords":"Communication, curiosity, versatility, changeability"},
+    {"num":4,"sanskrit":"Karka","english":"Cancer","ruling_planet":"Moon","element":"Water","quality":"Movable (Chara)","body_part":"Chest, breasts, stomach","keywords":"Nurture, emotion, family, protective attachment"},
+    {"num":5,"sanskrit":"Simha","english":"Leo","ruling_planet":"Sun","element":"Fire","quality":"Fixed (Sthira)","body_part":"Heart, upper back, spine","keywords":"Dignity, recognition, generosity, authority"},
+    {"num":6,"sanskrit":"Kanya","english":"Virgo","ruling_planet":"Mercury","element":"Earth","quality":"Dual (Dvisvabhava)","body_part":"Abdomen, intestines","keywords":"Analysis, service, discrimination, refinement"},
+    {"num":7,"sanskrit":"Tula","english":"Libra","ruling_planet":"Venus","element":"Air","quality":"Movable (Chara)","body_part":"Lower back, kidneys","keywords":"Balance, partnership, aesthetics, diplomacy"},
+    {"num":8,"sanskrit":"Vrishchika","english":"Scorpio","ruling_planet":"Mars","element":"Water","quality":"Fixed (Sthira)","body_part":"Reproductive organs, pelvis","keywords":"Intensity, transformation, secrecy, depth"},
+    {"num":9,"sanskrit":"Dhanu","english":"Sagittarius","ruling_planet":"Jupiter","element":"Fire","quality":"Dual (Dvisvabhava)","body_part":"Hips, thighs","keywords":"Expansion, philosophy, travel, optimism"},
+    {"num":10,"sanskrit":"Makara","english":"Capricorn","ruling_planet":"Saturn","element":"Earth","quality":"Movable (Chara)","body_part":"Knees, joints, bones","keywords":"Structure, ambition, discipline, delayed success"},
+    {"num":11,"sanskrit":"Kumbha","english":"Aquarius","ruling_planet":"Saturn","element":"Air","quality":"Fixed (Sthira)","body_part":"Calves, ankles, circulation","keywords":"Networks, ideals, unconventional, collective"},
+    {"num":12,"sanskrit":"Meena","english":"Pisces","ruling_planet":"Jupiter","element":"Water","quality":"Dual (Dvisvabhava)","body_part":"Feet, lymphatics","keywords":"Compassion, dissolution, intuition, transcendence"}
+  ]
+}

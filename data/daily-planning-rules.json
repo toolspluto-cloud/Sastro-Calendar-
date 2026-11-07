@@ -1,0 +1,98 @@
+{
+  "schema": "daily-planning-rules.v1",
+  "description": "Deterministic scoring rubric mapping weekday lord, daily Moon nakshatra, tithi, and optional personal dasha/personal-year into hour scores for work/meetings/rest/socializing; worst-day flags and remedies.",
+  "disclaimer": "Traditional/symbolic rules for entertainment apps. Not predictive certainty. Gemstones need professional advice.",
+  "sources": [
+    "https://panchangtime.com/methodology/day-quality",
+    "https://panchangtime.com/methodology/rahu-kalam",
+    "https://panchangtime.com/methodology/inauspicious-periods",
+    "https://moonketu.com/learn/techniques/vimshottari-dasha",
+    "https://drrpsharma.com/guides/astrology-remedies.html"
+  ],
+  "inputs": [
+    "weekday_lord",
+    "daily_moon_nakshatra",
+    "tithi_number_and_paksha",
+    "karana",
+    "yoga",
+    "local_sunrise_sunset (for Rahu Kaal eighths)",
+    "optional: natal_moon_nakshatra / current_mahadasha_lord",
+    "optional: personal_year_number"
+  ],
+  "activity_channels": ["work", "meetings", "rest", "socializing"],
+  "base_scores": {
+    "weekday_affinity": {
+      "work": {"Sun":1,"Moon":0,"Mars":1,"Mercury":2,"Jupiter":2,"Venus":1,"Saturn":1},
+      "meetings": {"Sun":1,"Moon":1,"Mars":0,"Mercury":2,"Jupiter":2,"Venus":2,"Saturn":0},
+      "rest": {"Sun":0,"Moon":2,"Mars":-1,"Mercury":0,"Jupiter":1,"Venus":1,"Saturn":2},
+      "socializing": {"Sun":1,"Moon":2,"Mars":1,"Mercury":1,"Jupiter":1,"Venus":2,"Saturn":-1}
+    },
+    "tithi_modifier": {
+      "Nanda": {"work":1,"meetings":1,"rest":0,"socializing":1},
+      "Bhadra": {"work":1,"meetings":1,"rest":0,"socializing":0},
+      "Jaya": {"work":1,"meetings":2,"rest":-1,"socializing":1},
+      "Rikta": {"work":-2,"meetings":-2,"rest":1,"socializing":-1},
+      "Purna": {"work":1,"meetings":1,"rest":0,"socializing":2},
+      "Amavasya": {"work":-2,"meetings":-2,"rest":2,"socializing":-1},
+      "Purnima": {"work":0,"meetings":1,"rest":0,"socializing":2}
+    },
+    "karana_modifier": {
+      "Vishti": {"work":-3,"meetings":-3,"rest":1,"socializing":-2},
+      "Vanija": {"work":2,"meetings":2,"rest":0,"socializing":1},
+      "default_movable": {"work":0,"meetings":0,"rest":0,"socializing":0}
+    },
+    "yoga_modifier": {
+      "inauspicious_list": ["Atiganda","Shula","Ganda","Vyaghata","Vyatipata","Parigha","Vaidhriti"],
+      "inauspicious_penalty": {"work":-2,"meetings":-2,"rest":1,"socializing":-1},
+      "highly_auspicious": ["Siddhi","Shiva","Siddha","Sadhya","Shubha","Brahma","Indra","Saubhagya","Ayushman"],
+      "auspicious_bonus": {"work":1,"meetings":1,"rest":0,"socializing":1}
+    }
+  },
+  "hour_windows": {
+    "method": "Divide local daylight into 8 equal parts (same as Rahu Kaal method). Night hours use softer default scores.",
+    "rules": [
+      {"if": "hour_falls_in_Rahu_Kaal", "then": {"work":-4,"meetings":-4,"rest":1,"socializing":-2,"flag":"avoid_new_starts"}},
+      {"if": "hour_falls_in_Yamaganda_or_Gulika", "then": {"work":-2,"meetings":-2,"rest":0,"socializing":-1,"flag":"caution_new_starts"}},
+      {"if": "hora_lord_matches_activity_planet", "then": {"bonus": 2}, "note": "Optional planetary hora: each hour ruled by a planet in weekday sequence — boost work/meetings when hora lord supports activity."},
+      {"if": "waxing_moon AND activity in [work,meetings]", "then": {"bonus": 1}},
+      {"if": "waning_moon AND activity == rest", "then": {"bonus": 1}}
+    ]
+  },
+  "personal_overlays": [
+    {"if": "weekday_lord == natal_moon_sign_lord OR weekday_lord == current_mahadasha_lord", "then": {"all_channels": 1,"note":"Personal affinity day"}},
+    {"if": "weekday_lord is natural malefic AND natal_moon_is_sensitive", "then": {"meetings":-1,"rest": 1}},
+    {"if": "personal_year in [4,8]", "then": {"flag":"stress_year","work":-1,"meetings":0,"rest": 1,"socializing":-1,"remedy_hint":true}},
+    {"if": "eclipse_day_known", "then": {"all_channels_new_starts":-3,"rest": 2,"flag":"eclipse_caution"}}
+  ],
+  "scoring_rubric": {
+    "steps": [
+      "Start each channel at 5 (neutral mid-scale 0–10).",
+      "Add weekday_affinity[channel][weekday_lord].",
+      "Add tithi_modifier for today's tithi class.",
+      "Add karana_modifier (Vishti heavy penalty).",
+      "Add yoga_modifier if yoga in inauspicious or highly auspicious lists.",
+      "Apply hour_windows rules for the specific clock hour.",
+      "Apply personal_overlays if available.",
+      "Clamp score to 0–10. Label: 0–3 avoid / rest, 4–6 neutral, 7–10 favored."
+    ]
+  },
+  "worst_day_flags": [
+    {"flag":"rikta_or_amavasya_with_vishti","severity":"high","message":"Poor day for launches and hard pitches; prefer admin, cleanup, rest."},
+    {"flag":"rahu_kaal_meeting_slot","severity":"high","message":"Do not start the meeting/decision in this window; shift ±1 hour if possible."},
+    {"flag":"personal_year_4_or_8","severity":"medium","message":"Stress/structure year in popular numerology — pace goals, emphasize systems."},
+    {"flag":"malefic_weekday_for_natal_moon","severity":"medium","message":"Softer communication day; favor written over confrontational talks."},
+    {"flag":"inauspicious_yoga","severity":"medium","message":"Classical texts flag friction — keep agenda short and concrete."}
+  ],
+  "remedy_attachments": {
+    "by_weekday_lord": {
+      "Sun": {"mantra":"Om Suryaya Namaha","color":"red/orange","fast_day":"Sunday","gemstone_caveat":"Ruby only after professional advice"},
+      "Moon": {"mantra":"Om Chandraya Namaha","color":"white","fast_day":"Monday","gemstone_caveat":"Pearl only after professional advice"},
+      "Mars": {"mantra":"Om Mangalaya Namaha","color":"red","fast_day":"Tuesday","gemstone_caveat":"Red coral only after professional advice"},
+      "Mercury": {"mantra":"Om Budhaya Namaha","color":"green","fast_day":"Wednesday","gemstone_caveat":"Emerald only after professional advice"},
+      "Jupiter": {"mantra":"Om Gurave Namaha","color":"yellow","fast_day":"Thursday","gemstone_caveat":"Yellow sapphire only after professional advice"},
+      "Venus": {"mantra":"Om Shukraya Namaha","color":"white/pink","fast_day":"Friday","gemstone_caveat":"Diamond/white sapphire only after professional advice"},
+      "Saturn": {"mantra":"Om Sham Shanicharaya Namaha","color":"navy/black","fast_day":"Saturday","gemstone_caveat":"Blue sapphire HIGH RISK — expert only"}
+    },
+    "presentation_rule": "Attach at most one mantra + color tip + fasting-day reminder. Always show gemstone caveat. Never auto-prescribe gems."
+  }
+}

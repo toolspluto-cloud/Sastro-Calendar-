@@ -1,0 +1,81 @@
+{
+  "schema": "grahas.v1",
+  "description": "9 grahas (Navagraha) with karaka significations, friendships, natural benefic/malefic, and traditional remedies.",
+  "commercial_flags": [
+    "Gemstone prescriptions require a credentialed Jyotishi; never auto-prescribe blue sapphire or similar without chart review.",
+    "Medical/psychological claims from graha significations are symbolic only — not diagnosis.",
+    "Mantra/fasting remedies are traditional cultural practices; present as educational/entertainment."
+  ],
+  "sources": [
+    "https://www.vedicdream.com/home/planets",
+    "https://dekhopanchang.com/en/learn/modules/2-1",
+    "https://www.astrojyotisha.com/jyotish-reference",
+    "https://saravali.github.io/astrology/dignities.html",
+    "https://drrpsharma.com/guides/astrology-remedies.html"
+  ],
+  "grahas": [
+    {
+      "english":"Sun","sanskrit":"Surya / Ravi","karaka":"Soul (Atma), father, authority, government, vitality, ego, bones, eyes, heart, status",
+      "friends":["Moon","Mars","Jupiter"],"enemies":["Venus","Saturn"],"neutral":["Mercury"],
+      "nature":"Mild natural malefic","weekday":"Sunday","color":"Red / orange / gold",
+      "gemstone":"Ruby (Manikya) — professional advice required","fast_or_worship_day":"Sunday",
+      "mantra_seed":"Om Suryaya Namaha / Gayatri","charity":"Wheat, copper, red cloth; help father-figures or government workers"
+    },
+    {
+      "english":"Moon","sanskrit":"Chandra / Soma","karaka":"Mind (Manas), mother, emotions, public, fluids, fertility, memory, breasts, lungs",
+      "friends":["Sun","Mercury"],"enemies":[],"neutral":["Mars","Jupiter","Venus","Saturn"],
+      "nature":"Benefic when waxing; malefic when strongly waning","weekday":"Monday","color":"White / silver",
+      "gemstone":"Pearl (Moti) — professional advice required","fast_or_worship_day":"Monday",
+      "mantra_seed":"Om Chandraya Namaha","charity":"Rice, milk, white cloth; support mothers or care workers"
+    },
+    {
+      "english":"Mars","sanskrit":"Mangal / Kuja","karaka":"Courage, younger siblings, land/property, energy, surgery, blood, muscles, military, sports",
+      "friends":["Sun","Moon","Jupiter"],"enemies":["Mercury"],"neutral":["Venus","Saturn"],
+      "nature":"Natural malefic","weekday":"Tuesday","color":"Red",
+      "gemstone":"Red coral (Moonga) — professional advice required","fast_or_worship_day":"Tuesday",
+      "mantra_seed":"Om Mangalaya Namaha / Om Angarakaya Namaha","charity":"Red lentils, copper, sweets to Hanuman temples; help siblings or athletes"
+    },
+    {
+      "english":"Mercury","sanskrit":"Budha","karaka":"Intellect, speech, commerce, writing, mathematics, skin, nervous system, maternal uncle, friends",
+      "friends":["Sun","Venus"],"enemies":["Moon"],"neutral":["Mars","Jupiter","Saturn"],
+      "nature":"Neutral — adopts nature of associates","weekday":"Wednesday","color":"Green",
+      "gemstone":"Emerald (Panna) — professional advice required","fast_or_worship_day":"Wednesday",
+      "mantra_seed":"Om Budhaya Namaha","charity":"Green gram, books, green cloth; support students or writers"
+    },
+    {
+      "english":"Jupiter","sanskrit":"Guru / Brihaspati","karaka":"Wisdom, dharma, children, teacher, husband (female chart), wealth, higher learning, liver, fat",
+      "friends":["Sun","Moon","Mars"],"enemies":["Mercury","Venus"],"neutral":["Saturn"],
+      "nature":"Great natural benefic","weekday":"Thursday","color":"Yellow / gold",
+      "gemstone":"Yellow sapphire (Pukhraj) — professional advice required","fast_or_worship_day":"Thursday",
+      "mantra_seed":"Om Gurave Namaha / Om Brihaspataye Namaha","charity":"Chana dal, turmeric, yellow cloth, books to teachers or temples"
+    },
+    {
+      "english":"Venus","sanskrit":"Shukra","karaka":"Love, marriage, wife (male chart), beauty, luxury, vehicles, arts, music, kidneys, reproductive system",
+      "friends":["Mercury","Saturn"],"enemies":["Sun","Moon"],"neutral":["Mars","Jupiter"],
+      "nature":"Natural benefic","weekday":"Friday","color":"White / pink / pastel",
+      "gemstone":"Diamond / white sapphire — professional advice required","fast_or_worship_day":"Friday",
+      "mantra_seed":"Om Shukraya Namaha","charity":"Sugar, white/pink cloth, perfume, art supplies; support artists or women's causes"
+    },
+    {
+      "english":"Saturn","sanskrit":"Shani","karaka":"Karma, longevity, discipline, delay, servants, masses, chronic illness, bones, joints, old age, labor",
+      "friends":["Mercury","Venus"],"enemies":["Sun","Moon","Mars"],"neutral":["Jupiter"],
+      "nature":"Natural malefic","weekday":"Saturday","color":"Black / dark blue / navy",
+      "gemstone":"Blue sapphire (Neelam) — HIGH RISK; never prescribe without expert chart review","fast_or_worship_day":"Saturday",
+      "mantra_seed":"Om Sham Shanicharaya Namaha","charity":"Black sesame, iron, dark cloth, oil; serve elderly, laborers, or the needy"
+    },
+    {
+      "english":"Rahu","sanskrit":"Rahu","karaka":"Foreign, unconventional, obsession, illusion, technology, sudden gains/losses, addiction, paternal grandfather",
+      "friends":["Mercury","Venus","Saturn"],"enemies":["Sun","Moon","Mars"],"neutral":["Jupiter"],
+      "nature":"Shadow malefic (mimics Saturn)","weekday":"Saturday (common practice)","color":"Smoke / grey / dark blue",
+      "gemstone":"Hessonite (Gomed) — professional advice required","fast_or_worship_day":"Saturday",
+      "mantra_seed":"Om Rahave Namaha","charity":"Mustard oil, blankets, support for immigrants or unconventional charities"
+    },
+    {
+      "english":"Ketu","sanskrit":"Ketu","karaka":"Moksha, spirituality, past-life karma, detachment, research, occult, maternal grandfather",
+      "friends":["Mars","Jupiter","Sun"],"enemies":["Moon","Venus","Mercury"],"neutral":["Saturn"],
+      "nature":"Shadow malefic (mimics Mars)","weekday":"Tuesday or Thursday (traditions vary)","color":"Multicolor / grey / mottled",
+      "gemstone":"Cat's eye (Lehsunia) — professional advice required","fast_or_worship_day":"Tuesday/Thursday",
+      "mantra_seed":"Om Ketave Namaha","charity":"Multicolored cloth, dog food, support spiritual seekers or research causes"
+    }
+  ]
+}
