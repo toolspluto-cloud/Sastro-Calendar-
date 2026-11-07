@@ -140,20 +140,26 @@ export default function CalendarPage() {
     checkProfile();
   }, [checkProfile]);
 
-  const loadEvents = useCallback(() => {
-    const q = new URLSearchParams({
-      from: range.from.toISOString(),
-      to: range.to.toISOString(),
-    });
-    getJson(`/api/calendar/events?${q}`)
-      .then((d) => {
-        setEvents(d.events || []);
-        setMode(d.mode || "mock");
-        setReason(d.reason || "");
-        setNeedsReauth(Boolean(d.needsReauth));
-      })
-      .catch(() => setLoadFailed(true));
-  }, [range]);
+  const loadEvents = useCallback(
+    (opts?: { silent?: boolean }) => {
+      const q = new URLSearchParams({
+        from: range.from.toISOString(),
+        to: range.to.toISOString(),
+      });
+      getJson(`/api/calendar/events?${q}`)
+        .then((d) => {
+          setEvents(d.events || []);
+          setMode(d.mode || "mock");
+          setReason(d.reason || "");
+          setNeedsReauth(Boolean(d.needsReauth));
+        })
+        .catch(() => {
+          // A background refresh that fails keeps the events already on screen.
+          if (!opts?.silent) setLoadFailed(true);
+        });
+    },
+    [range]
+  );
 
   const loadTimeline = useCallback(() => {
     const date = format(cursor, "yyyy-MM-dd");
@@ -166,6 +172,22 @@ export default function CalendarPage() {
     loadEvents();
     loadTimeline();
   }, [loadEvents, loadTimeline]);
+
+  // Pick up events added in Google Calendar without a manual reload:
+  // fetch again when the user comes back to this tab, and every minute while it is visible.
+  useEffect(() => {
+    const refresh = () => {
+      if (document.visibilityState === "visible") loadEvents({ silent: true });
+    };
+    const timer = window.setInterval(refresh, 60_000);
+    document.addEventListener("visibilitychange", refresh);
+    window.addEventListener("focus", refresh);
+    return () => {
+      window.clearInterval(timer);
+      document.removeEventListener("visibilitychange", refresh);
+      window.removeEventListener("focus", refresh);
+    };
+  }, [loadEvents]);
 
   useEffect(() => {
     if (!selected || !timeline) {
