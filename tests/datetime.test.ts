@@ -3,6 +3,8 @@ import {
   formatEventTime,
   formatEventTimeShort,
   isAllDayEvent,
+  isValidTimeZone,
+  wallClockIn,
   isSameLocalDay,
   localFractionalHour,
   localWallDateTime,
@@ -54,5 +56,35 @@ describe("datetime", () => {
     expect(formatEventTime("")).toBe("");
     expect(formatEventTime("nope")).toBe("");
     expect(Number.isNaN(parseEventDate("").getTime())).toBe(true);
+  });
+});
+
+describe("wallClockIn", () => {
+  // 08:45 UTC on Sat 7 Nov 2026 is 2:15 PM in India and 12:45 AM in Los Angeles.
+  const at = new Date(Date.UTC(2026, 10, 7, 8, 45, 30));
+
+  it("reads as the user's wall-clock time, whatever the server zone", () => {
+    const india = wallClockIn("Asia/Kolkata", at);
+    expect([india.getDate(), india.getHours(), india.getMinutes(), india.getSeconds()]).toEqual([7, 14, 15, 30]);
+    expect(india.getDay()).toBe(6);
+    const la = wallClockIn("America/Los_Angeles", at);
+    expect([la.getDate(), la.getHours(), la.getMinutes()]).toEqual([7, 0, 45]);
+  });
+
+  it("handles a day that has already changed for the user", () => {
+    const auckland = wallClockIn("Pacific/Auckland", new Date(Date.UTC(2026, 10, 7, 20, 0)));
+    expect([auckland.getDate(), auckland.getHours()]).toEqual([8, 9]);
+  });
+
+  it("keeps the given time for a missing or unknown zone", () => {
+    expect(wallClockIn(undefined, at)).toBe(at);
+    expect(wallClockIn("Mars/Olympus", at)).toBe(at);
+  });
+
+  it("validates zone names", () => {
+    expect(isValidTimeZone("Asia/Kolkata")).toBe(true);
+    expect(isValidTimeZone("Not/AZone")).toBe(false);
+    expect(isValidTimeZone(42)).toBe(false);
+    expect(isValidTimeZone("")).toBe(false);
   });
 });

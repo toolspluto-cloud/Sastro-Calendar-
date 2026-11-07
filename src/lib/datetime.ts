@@ -17,6 +17,38 @@ export function browserTimeZone(): string {
   }
 }
 
+/** True for a real IANA zone such as "Asia/Kolkata". */
+export function isValidTimeZone(tz: unknown): tz is string {
+  if (typeof tz !== "string" || !tz.trim() || tz.length > 64) return false;
+  try {
+    new Intl.DateTimeFormat("en-US", { timeZone: tz });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * The user's wall-clock "now" as a Date whose local fields (getHours, getDay…)
+ * read as the time in `tz`. Servers such as Vercel run on UTC, so code that reads
+ * local fields must get this instead of `new Date()`. An unknown zone keeps `at`.
+ */
+export function wallClockIn(tz: string | undefined, at: Date = new Date()): Date {
+  if (!isValidTimeZone(tz)) return at;
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: tz,
+    hourCycle: "h23",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).formatToParts(at);
+  const get = (type: string) => Number(parts.find((p) => p.type === type)?.value);
+  return new Date(get("year"), get("month") - 1, get("day"), get("hour"), get("minute"), get("second"));
+}
+
 /** Parse Google date / dateTime into a Date in local interpretation. */
 export function parseEventDate(isoOrDate: string): Date {
   if (!isoOrDate) return new Date(NaN);

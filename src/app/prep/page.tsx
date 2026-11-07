@@ -127,6 +127,7 @@ export default function PrepPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           question,
+          timeZone: browserTimeZone(),
           history: msgs.map((m) => ({
             role: m.role === "you" ? "user" : "assistant",
             content: m.text,

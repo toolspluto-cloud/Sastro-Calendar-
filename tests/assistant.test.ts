@@ -184,6 +184,13 @@ describe("askSatro with Gemini", () => {
     expect(sent().body.model).toBe("gemini-3.8-flash");
   });
 
+  it("tells the model the user's time, not the server's", async () => {
+    fetchMock.mockResolvedValue(geminiReply("Lovely!"));
+    // Saturday 2 PM wall-clock for the user, passed in by the chat route.
+    await askSatro("hello there", [], "", new Date(2026, 10, 7, 14, 15));
+    expect(sent().body.input.at(-1).content[0].text).toContain('"now":"Saturday 2 PM"');
+  });
+
   it("never sends the birth date, only derived results", async () => {
     fetchMock.mockResolvedValue(geminiReply("Lovely!"));
     await askSatro("hello there", []);

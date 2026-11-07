@@ -91,9 +91,8 @@ export function cleanHistory(raw: unknown): ChatTurn[] {
   return firstUser === -1 ? [] : turns.slice(firstUser);
 }
 
-function buildContext(question: string, about: string) {
+function buildContext(question: string, about: string, now: Date) {
   const profile = readProfile();
-  const now = new Date();
   const today = howTodayLooks(now);
   const moment = matchMoment(question);
   const explainer = EXPLAINERS.find((e) => e.match.test(question));
@@ -241,13 +240,14 @@ async function askGemini(
 export async function askSatro(
   rawQuestion: string,
   rawHistory: unknown,
-  about = ""
+  about = "",
+  now = new Date()
 ): Promise<AssistantAnswer> {
   const question = rawQuestion.trim().slice(0, MAX_QUESTION_CHARS);
-  const rules = (): AssistantAnswer => ({ ...answerFromCorpus(question), mode: "rules" });
+  const rules = (): AssistantAnswer => ({ ...answerFromCorpus(question, now), mode: "rules" });
   if (!question || !isAiEnabled() || isCrisisMessage(question)) return rules();
 
-  const context = buildContext(question, about);
+  const context = buildContext(question, about, now);
   const ask = aiProvider() === "gemini" ? askGemini : askClaude;
   const reply = await ask(question, cleanHistory(rawHistory), context);
   if (!reply || !isOnBrand(reply, question, context)) return rules();

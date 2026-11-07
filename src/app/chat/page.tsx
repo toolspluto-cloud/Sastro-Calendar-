@@ -10,6 +10,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { format } from "date-fns";
 import {
+  browserTimeZone,
   formatEventTime,
   isAllDayEvent,
   localFractionalHour,
@@ -98,7 +99,7 @@ export default function ChatPage() {
       /* ignore */
     }
 
-    getJson("/api/chat")
+    getJson(`/api/chat?tz=${encodeURIComponent(browserTimeZone())}`)
       .then((d) => {
         setTip(d.tip?.tip || "");
         if (d.today) setToday(d.today);
@@ -172,6 +173,7 @@ export default function ChatPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           question: q,
+          timeZone: browserTimeZone(),
           history: msgs.map((m) => ({
             role: m.role === "user" ? "user" : "assistant",
             content: m.text,
@@ -225,7 +227,7 @@ export default function ChatPage() {
       setSavedId(ev.id);
       const fresh = await getJson(`/api/feedback?date=${date}`);
       setSummary(fresh.summary || "");
-      setInsight((await getJson("/api/chat")).insight || "");
+      setInsight((await getJson(`/api/chat?tz=${encodeURIComponent(browserTimeZone())}`)).insight || "");
     } catch {
       setLoadFailed(true);
     }

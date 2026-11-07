@@ -109,15 +109,15 @@ export function retrieveChunks(question: string) {
     .slice(0, 4);
 }
 
-export function dailyTip(): { tip: string; source: string } {
-  const day = scoreDay(new Date(), readProfile().birthDate);
+export function dailyTip(now = new Date()): { tip: string; source: string } {
+  const day = scoreDay(now, readProfile().birthDate);
   const tips = [
     day.bestHourHint,
     `${day.weekday}s are for you. ${VIBE_NUDGE[day.labels.socializing]}`,
     day.flags[0] || day.bestHourHint,
     `Meetings today: ${VIBE_WORDS[day.labels.meetings]}.`,
   ];
-  const idx = new Date().getDate() % tips.length;
+  const idx = now.getDate() % tips.length;
   return {
     tip: tips[idx],
     source: "Satro",
@@ -130,7 +130,8 @@ export function howTodayLooks(date = new Date()) {
   return todayCardSummary(date, profile.preferredDomains, profile.birthDate, readAdjustments());
 }
 
-export function answerFromCorpus(question: string): ChatAnswer {
+/** `now` is the user's wall-clock time (see wallClockIn); it drives every best time. */
+export function answerFromCorpus(question: string, now = new Date()): ChatAnswer {
   const q = question.trim();
   if (!q) {
     return {
@@ -153,7 +154,7 @@ export function answerFromCorpus(question: string): ChatAnswer {
   if (moment) {
     const profile = readProfile();
     return {
-      answer: answerMoment(moment, new Date(), profile.preferredDomains, profile.birthDate),
+      answer: answerMoment(moment, now, profile.preferredDomains, profile.birthDate),
       sources: [],
       matches: [],
       disclaimer: FRIENDLY_DISCLAIMER,
@@ -161,7 +162,7 @@ export function answerFromCorpus(question: string): ChatAnswer {
   }
   // Scripted shortcuts
   if (/(tip|today|best hour|rahu)/.test(lower)) {
-    const tip = dailyTip();
+    const tip = dailyTip(now);
     return {
       answer: tip.tip,
       sources: [tip.source],
